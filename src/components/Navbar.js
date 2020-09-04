@@ -1,20 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {
+	StyledNavItems,
+	StyledNavbar,
+	StyledNavBrand,
+	StyledLink,
+} from '../styled/Navbar'
 
 export default function Navbar() {
 	return (
-		<nav>
-			<div>
+		<StyledNavbar>
+			<StyledNavBrand>
 				<Link to="/">Learning React and Serverless</Link>
-			</div>
-			<ul>
+			</StyledNavBrand>
+			<StyledNavItems>
 				<li>
-					<Link to="/">Home</Link>
+					<StyledLink to="/">Home</StyledLink>
 				</li>
 				<li>
-					<Link to="/highscores">High Scores</Link>
+					<StyledLink to="/highscores">High Scores</StyledLink>
 				</li>
-			</ul>
-		</nav>
+			</StyledNavItems>
+		</StyledNavbar>
 	)
 }
