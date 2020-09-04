@@ -11,3 +11,7 @@ export const StyledTitle = styled.h1`
 	margin-bottom: 2rem;
 	margin-top: 3rem;
 `
+
+export const Strong = styled.strong`
+	font-weight: bold;
+`
