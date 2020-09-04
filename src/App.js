@@ -7,9 +7,12 @@ import Game from './pages/Game'
 import HighScores from './pages/HighScores'
 import GameOver from './pages/GameOver'
 
+import Navbar from './components/Navbar'
+
 function App() {
 	return (
 		<Router>
+			<Navbar></Navbar>
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/game" component={Game} />
