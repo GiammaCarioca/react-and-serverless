@@ -8,13 +8,14 @@ import {
 } from '../styled/Game'
 
 import { Strong } from '../styled/Random'
+import { useScore } from '../contexts/ScoreContext'
 
 // Since Game is a page component it will receive a property of history from React Router that we can use to navigate
 export default function Game({ history }) {
 	const MAX_SECONDS = 5
 	const characters = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
-	const [score, setScore] = useState(0)
+	const [score, setScore] = useScore()
 	const [ms, setMs] = useState(999) // milliseconds
 	const [seconds, setSeconds] = useState(MAX_SECONDS)
 	const [currentCharacter, setCurrentCharacter] = useState('')
@@ -57,12 +58,13 @@ export default function Game({ history }) {
 		}
 
 		setRandomCharacter()
+		setScore(0)
 
 		// cleanin up
 		return () => {
 			clearInterval(interval)
 		}
-	}, []) // it runs only once
+	}, [setScore, setSeconds]) // it runs only once
 
 	useEffect(() => {
 		if (seconds <= -1) {
@@ -71,9 +73,10 @@ export default function Game({ history }) {
 		}
 	}, [seconds, ms, history]) // history is a dependency because our effect actually uses it)
 
+	// useCallback(callbackFun, deps) returns the same function instance between renderings
 	const keyUpHandler = useCallback(
 		(e) => {
-			console.log(e.key, currentCharacter)
+			// console.log(e.key, currentCharacter)
 
 			if (e.key === currentCharacter) {
 				setScore((prevScore) => prevScore + 1)
@@ -84,7 +87,7 @@ export default function Game({ history }) {
 			}
 			setRandomCharacter()
 		},
-		[currentCharacter, score]
+		[currentCharacter, score, setScore] // giving the same dependency values deps, the hook returns the same function instance between renderings
 	)
 
 	useEffect(() => {
