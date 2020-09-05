@@ -65,6 +65,18 @@ export default function Game({ history }) {
 		}
 	}, [seconds, ms, history]) // history is a dependency because our effect actually uses it)
 
+	useEffect(() => {
+		const keyUpHandler = (e) => {
+			console.log(e.key)
+		}
+
+		document.addEventListener('keyup', keyUpHandler)
+
+		return () => {
+			document.removeEventListener('keyup', keyUpHandler)
+		}
+	}, [])
+
 	return (
 		<StyledGame>
 			<StyledScore>
