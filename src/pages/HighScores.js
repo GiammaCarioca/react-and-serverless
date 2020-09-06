@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { StyledTitle } from '../styled/Random'
 import { ScoreLI } from '../styled/HighScores'
 
 export default function HighScores() {
@@ -22,7 +23,7 @@ export default function HighScores() {
 
 	return (
 		<>
-			<h1>High Scores</h1>
+			<StyledTitle>High Scores</StyledTitle>
 			<ol>
 				{highScores.map((score) => (
 					<ScoreLI key={score.id}>

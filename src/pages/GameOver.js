@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useScore } from '../contexts/ScoreContext'
+import { StyledTitle } from '../styled/Random'
 import { StyledLink } from '../styled/Navbar'
 import { StyledCharacter } from '../styled/Game'
 
@@ -35,7 +36,7 @@ export default function GameOver({ history }) {
 
 	return (
 		<>
-			<h1>Game Over</h1>
+			<StyledTitle>Game Over</StyledTitle>
 			<h2>{scoreMessage}</h2>
 
 			<StyledCharacter>{score}</StyledCharacter>
