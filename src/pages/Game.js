@@ -12,7 +12,7 @@ import { useScore } from '../contexts/ScoreContext'
 
 // Since Game is a page component it will receive a property of history from React Router that we can use to navigate
 export default function Game({ history }) {
-	const MAX_SECONDS = 5
+	const MAX_SECONDS = 10
 	const characters = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
 	const [score, setScore] = useScore()
