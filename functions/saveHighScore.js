@@ -1,14 +1,17 @@
 const { table, getHighScores } = require('./utils/airtable')
-const { getAccessTokenFromHeaders } = require('./utils/auth')
+const {
+	getAccessTokenFromHeaders,
+	validateAccessToken,
+} = require('./utils/auth')
 
 exports.handler = async (event) => {
 	const accessToken = getAccessTokenFromHeaders(event.headers)
-	console.log(accessToken)
+	const user = await validateAccessToken(accessToken)
 
-	if (!accessToken) {
+	if (!user) {
 		return {
-			statusCode: 401,
-			body: JSON.stringify({ err: 'User is not logged in.' }),
+			statusCode: 403,
+			body: JSON.stringify({ err: 'Unauthorized' }),
 		}
 	}
 
@@ -18,10 +21,11 @@ exports.handler = async (event) => {
 			body: JSON.stringify({ err: 'That method is not allowed' }),
 		}
 	}
-	const { score, name } = JSON.parse(event.body)
+	const { score } = JSON.parse(event.body)
+	const name = user['https://type-game-react-and-serverless/username']
 	if (typeof score === 'undefined' || !name) {
 		return {
-			statusCode: 405,
+			statusCode: 400,
 			body: JSON.stringify({ err: 'Bad request' }),
 		}
 	}
