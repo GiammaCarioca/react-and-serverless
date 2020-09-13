@@ -14,28 +14,33 @@ import { Main } from './styled/Main'
 
 import { useAuth0 } from '@auth0/auth0-react'
 
+import { ThemeProvider } from 'styled-components';import { lightTheme, darkTheme } from './styled/Themes';
+
 function App() {
 	const { isLoading } = useAuth0()
-
-
+	
+	const theme = 'light'
+  const currentTheme = theme === 'light' ? lightTheme : darkTheme
 
 	return (
 		<Router>
-			<GlobalStyle />
-			<Main>
-				{isLoading && <p>Loading...</p>}
-				{!isLoading &&
-					<Container>
-						<Navbar></Navbar>
-						<Switch>
-							<Route path="/" exact component={Home} />
-							<Route path="/game" component={Game} />
-							<Route path="/highScores" component={HighScores} />
-							<Route path="/gameOver" component={GameOver} />
-						</Switch>
-					</Container>
-				}
-			</Main>
+			<ThemeProvider theme={currentTheme}>
+				<GlobalStyle />
+				<Main>
+					{isLoading && <p>Loading...</p>}
+					{!isLoading &&
+						<Container>
+							<Navbar></Navbar>
+							<Switch>
+								<Route path="/" exact component={Home} />
+								<Route path="/game" component={Game} />
+								<Route path="/highScores" component={HighScores} />
+								<Route path="/gameOver" component={GameOver} />
+							</Switch>
+						</Container>
+					}
+				</Main>
+			</ThemeProvider>
 		</Router>
 	)
 }
