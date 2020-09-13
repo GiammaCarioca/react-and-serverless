@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import { GlobalStyle } from './styled/Global'
 import { Container } from './styled/Container'
 import { Main } from './styled/Main'
+import Loader from './styled/Loader';
 
 import { useAuth0 } from '@auth0/auth0-react'
 
@@ -29,7 +30,11 @@ function App() {
 			<ThemeProvider theme={currentTheme}>
 				<GlobalStyle />
 				<Main>
-					{isLoading && <p>Loading...</p>}
+					{isLoading && (
+						<Loader>
+							<p>Loading...</p>
+						</Loader>
+					)}
 					{!isLoading &&
 						<Container>
 							<Navbar toggleTheme={toggleTheme} />
