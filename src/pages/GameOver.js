@@ -20,7 +20,7 @@ export default function GameOver({ history }) {
 				const accessToken = await getAccessTokenSilently()
 				const options = {
 					method: 'POST',
-					body: JSON.stringify({ name: 'Lui', score }),
+					body: JSON.stringify({ name: 'anonymous', score }),
 					headers: {
 						Authorization: `Bearer ${accessToken}`,
 					},
